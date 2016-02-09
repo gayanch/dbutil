@@ -11,3 +11,6 @@ Java Library for Generate Table/ComboBox Models from sql ResultSets
 * Now set it to a JTable as follows
 `<yourTableName>.setModel(dtm);`
 
+# Notes
+* Add dbutil.jar file to your classpath before using
+* And import DBUtil by `import org.gck.DBUtil;` 
