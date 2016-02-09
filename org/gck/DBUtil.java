@@ -10,6 +10,7 @@ import java.util.Vector;
  *	Wrapper for ResultSet to generate TableModels
  *
  * @author Gayan C. Karunarathna
+ * @version 0.2
  */
 public class DBUtil {
 	
@@ -61,20 +62,7 @@ public class DBUtil {
 	 * @return DefaultComboBoxModel containing data of ResultSet
 	 */
 	public static DefaultComboBoxModel<Object> resultSetToComboBoxModel(ResultSet res) {
-		try {
-			if (res == null || res.isClosed()) {
-				return null;
-			}
-			Vector<Object> rows = new Vector<Object>();
-			while(res.next()) {
-				rows.add(res.getObject(1));
-			}
-			return new DefaultComboBoxModel<Object>(rows);
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			return null;
-		}
+		return resultSetToComboBoxModel(res, 1, null);
 	}
 	
 	/**
@@ -84,20 +72,7 @@ public class DBUtil {
 	 * @return DefaultComboBoxModel containing data of ResultSet
 	 */
 	public static DefaultComboBoxModel<Object> resultSetToComboBoxModel(ResultSet res, int index) {
-		try {
-			if (res == null || res.isClosed()) {
-				return null;
-			}
-			Vector<Object> rows = new Vector<Object>();
-			while(res.next()) {
-				rows.add(res.getObject(index));
-			}
-			return new DefaultComboBoxModel<Object>(rows);
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			return null;
-		}
+		return resultSetToComboBoxModel(res, index, null);
 	}
 	
 	/**
@@ -107,20 +82,7 @@ public class DBUtil {
 	 * @return DefaultComboBoxModel containing of ResultSet
 	 */
 	public static DefaultComboBoxModel<Object> resultSetToComboBoxModel(ResultSet res, String columnName) {
-		try {
-			if (res == null || res.isClosed()) {
-				return null;
-			}
-			Vector<Object> rows = new Vector<Object>();
-			while(res.next()) {
-				rows.add(res.getObject(columnName));
-			}
-			return new DefaultComboBoxModel<Object>(rows);
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			return null;
-		}
+		return resultSetToComboBoxModel(res, columnName, null);
 	}
 	
 	/**
@@ -135,10 +97,43 @@ public class DBUtil {
 			if (res == null || res.isClosed()) {
 				return null;
 			}
+			
 			Vector<Object> rows = new Vector<Object>();
-			rows.add(firstItem);
+			if (firstItem != null) {
+				rows.add(firstItem);
+			}
+			
 			while(res.next()) {
 				rows.add(res.getObject(columnName));
+			}
+			return new DefaultComboBoxModel<Object>(rows);
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * Generates a DefaultComboBoxModel from given ResultSet (given columnName of ResultSet will be used).
+	 * @param res ResultSet to generate ComboBoxModel	
+	 * @param index column index of resultset for fill the ComboBoxModel
+	 * @param firstItem first item to included in ComboBoxModel
+	 * @return DefaultComboBoxModel containing data of ResultSet
+	 */
+	public static DefaultComboBoxModel<Object> resultSetToComboBoxModel(ResultSet res, int index, String firstItem) {
+		try {
+			if (res == null || res.isClosed()) {
+				return null;
+			}
+			
+			Vector<Object> rows = new Vector<Object>();
+			if (firstItem != null) {
+				rows.add(firstItem);
+			}
+			
+			while(res.next()) {
+				rows.add(res.getObject(index));
 			}
 			return new DefaultComboBoxModel<Object>(rows);
 			
