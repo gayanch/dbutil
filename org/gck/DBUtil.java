@@ -4,19 +4,22 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import java.util.Vector;
 
 /**
  *	Wrapper for ResultSet to generate TableModels
  *
  * @author Gayan C. Karunarathna
- * @version 0.2
+ * @version 0.3
  */
 public class DBUtil {
 	
 	//no need to initialize
 	private DBUtil() {}
-	
+
+/* Methods for generating TableModel */
+
 	/**
 	 * Generates a DefaultTableModel from given ResultSet
 	 * @param res ResultSet of sql query to generate tablemodel
@@ -55,6 +58,8 @@ public class DBUtil {
 			return null;
 		}
 	}
+
+/* Methods for generating TableModel */
 	
 	/**
 	 * Generates a DefaultComboBoxModel from given ResultSet (first row of ResultSet will be used)
@@ -71,8 +76,8 @@ public class DBUtil {
 	 * @param index column index number of resultset for fill the ComboBoxModel
 	 * @return DefaultComboBoxModel containing data of ResultSet
 	 */
-	public static DefaultComboBoxModel<Object> resultSetToComboBoxModel(ResultSet res, int index) {
-		return resultSetToComboBoxModel(res, index, null);
+	public static DefaultComboBoxModel<Object> resultSetToComboBoxModel(ResultSet res, int column) {
+		return resultSetToComboBoxModel(res, column, null);
 	}
 	
 	/**
@@ -81,8 +86,8 @@ public class DBUtil {
 	 * @param columnName column name of resultset for fill the ComboBoxModel
 	 * @return DefaultComboBoxModel containing of ResultSet
 	 */
-	public static DefaultComboBoxModel<Object> resultSetToComboBoxModel(ResultSet res, String columnName) {
-		return resultSetToComboBoxModel(res, columnName, null);
+	public static DefaultComboBoxModel<Object> resultSetToComboBoxModel(ResultSet res, String column) {
+		return resultSetToComboBoxModel(res, column, null);
 	}
 	
 	/**
@@ -92,7 +97,7 @@ public class DBUtil {
 	 * @param firstItem first item to included in ComboBoxModel
 	 * @return DefaultComboBoxModel containing data of ResultSet
 	 */
-	public static DefaultComboBoxModel<Object> resultSetToComboBoxModel(ResultSet res, String columnName, String firstItem) {
+	public static DefaultComboBoxModel<Object> resultSetToComboBoxModel(ResultSet res, String column, String firstItem) {
 		try {
 			if (res == null || res.isClosed()) {
 				return null;
@@ -104,7 +109,7 @@ public class DBUtil {
 			}
 			
 			while(res.next()) {
-				rows.add(res.getObject(columnName));
+				rows.add(res.getObject(column));
 			}
 			return new DefaultComboBoxModel<Object>(rows);
 			
@@ -115,13 +120,13 @@ public class DBUtil {
 	}
 	
 	/**
-	 * Generates a DefaultComboBoxModel from given ResultSet (given columnName of ResultSet will be used).
+	 * Generates a DefaultComboBoxModel from given ResultSet (given column Name of ResultSet will be used).
 	 * @param res ResultSet to generate ComboBoxModel	
 	 * @param index column index of resultset for fill the ComboBoxModel
 	 * @param firstItem first item to included in ComboBoxModel
 	 * @return DefaultComboBoxModel containing data of ResultSet
 	 */
-	public static DefaultComboBoxModel<Object> resultSetToComboBoxModel(ResultSet res, int index, String firstItem) {
+	public static DefaultComboBoxModel<Object> resultSetToComboBoxModel(ResultSet res, int column, String firstItem) {
 		try {
 			if (res == null || res.isClosed()) {
 				return null;
@@ -133,12 +138,45 @@ public class DBUtil {
 			}
 			
 			while(res.next()) {
-				rows.add(res.getObject(index));
+				rows.add(res.getObject(column));
 			}
 			return new DefaultComboBoxModel<Object>(rows);
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			return null;
+		}
+	}
+	
+	
+/* Methods for generating ListModels */
+
+	public static DefaultListModel resultSetToListModel(ResultSet res) {
+		return resultSetToListModel(res, 1);
+	}
+	
+	public static DefaultListModel resultSetToListModel(ResultSet res, int column) {
+		DefaultListModel<Object> dm = new DefaultListModel<Object>();
+		try {
+			while(res.next()) {
+				dm.addElement(res.getObject(column));
+			}
+			return dm;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static DefaultListModel resultSetToListModel(ResultSet res, String column) {
+		DefaultListModel<Object> dm = new DefaultListModel<Object>();
+		try {
+			while(res.next()) {
+				dm.addElement(res.getObject(column));
+			}
+			return dm;
+		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
