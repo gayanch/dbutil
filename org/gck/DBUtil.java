@@ -1,11 +1,9 @@
 package org.gck;
 
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
-import java.util.Vector;
 
 /**
  *	Wrapper for ResultSet to generate TableModels
