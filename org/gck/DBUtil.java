@@ -113,10 +113,20 @@ public class DBUtil {
 		return ListModelGenerator.resultSetToListModel(res, column);
 	}
 	
+	/**
+	 * Generates a Vector containing column labels in ResultSet
+	 * @param res ResultSet to generate a Vector
+	 * @return Vector filled with column labels in ResultSet
+	 */
 	public static Vector<String> resultSetToColumnNameVector(ResultSet res) {
 		return VectorGenerator.resultSetToColumnNameVector(res);
 	}
 	
+	/**
+	 * Generates a Vector data of all rows as set of Vectors
+	 * @param res ResultSet to generate a Vector
+	 * @return Vector filled with rows in ResultSet
+	 */
 	public static Vector<Object> resultSetToRowsVector(ResultSet res) {
 		return VectorGenerator.resultSetToRowsVector(res);
 	}
