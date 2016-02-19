@@ -7,7 +7,8 @@ import javax.swing.DefaultListModel;
 import java.util.Vector;
 
 /**
- *	Wrapper for ResultSet to generate TableModels
+ *	Wrapper for ResultSet to generate various models including,
+ * DefaultTableModel, DefaultComboBoxModel, DefaultListModel and data Vectors
  *
  * @author Gayan C. Karunarathna
  * @version 0.4
