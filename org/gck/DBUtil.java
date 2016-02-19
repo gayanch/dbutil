@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import java.util.Vector;
 
 /**
  *	Wrapper for ResultSet to generate TableModels
@@ -110,5 +111,13 @@ public class DBUtil {
 	 */
 	public static DefaultListModel resultSetToListModel(ResultSet res, String column) {
 		return ListModelGenerator.resultSetToListModel(res, column);
+	}
+	
+	public static Vector<String> resultSetToColumnNameVector(ResultSet res) {
+		return VectorGenerator.resultSetToColumnNameVector(res);
+	}
+	
+	public static Vector<Object> resultSetToRowsVector(ResultSet res) {
+		return VectorGenerator.resultSetToRowsVector(res);
 	}
 }

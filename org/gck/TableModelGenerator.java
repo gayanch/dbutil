@@ -26,25 +26,12 @@ public class TableModelGenerator {
 			}
 			
 			//creating a vector with column names
-			ResultSetMetaData data = res.getMetaData();
-			int colCount = data.getColumnCount();
-			Vector<String> columns = new Vector<String>(colCount);
-			for (int i=1; i<=colCount; i++) {
-				columns.add(data.getColumnLabel(i));
-			}
-			
+			Vector<String> columns = VectorGenerator.resultSetToColumnNameVector(res);
+			res.beforeFirst();
+						
 			//Vector for store rows
-			Vector<Object> rows = new Vector<Object>();
-			while(res.next()) {
-				//vector for row
-				Vector<Object> row = new Vector<Object>(colCount);
-				for (int i=1; i<=colCount; i++) {
-					row.add(res.getObject(i));
-				}
-				
-				//add row to rows
-				rows.add(row);
-			}
+			Vector<Object> rows = VectorGenerator.resultSetToRowsVector(res);
+			
 			return new DefaultTableModel(rows, columns);
 			
 		} catch (Exception ex) {
