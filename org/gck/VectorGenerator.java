@@ -26,6 +26,7 @@ public class VectorGenerator {
 		}
 	}
 	
+	//returns data in all rows
 	protected static Vector<Object> resultSetToRowsVector(ResultSet res) {
 		try {
 			if (res == null || res.isClosed()) 	return null;
@@ -41,6 +42,38 @@ public class VectorGenerator {
 					row.add( res.getObject(i) );
 				}
 				rows.add(row);
+			}
+			return rows;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	//returns rows in i'th column
+	protected static Vector<Object> resultSetToRowsVector(ResultSet res, int index) {
+		try {
+			if (res == null || res.isClosed()) 	return null;
+						
+			Vector<Object> rows = new Vector<Object>();
+			while (res.next()) {
+				rows.add( res.getObject(index) );
+			}
+			return rows;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	//returns rows in column name colName
+	protected static Vector<Object> resultSetToRowsVector(ResultSet res, String colName) {
+		try {
+			if (res == null || res.isClosed()) 	return null;
+						
+			Vector<Object> rows = new Vector<Object>();
+			while (res.next()) {
+				rows.add( res.getObject(colName) );
 			}
 			return rows;
 		} catch (Exception e) {

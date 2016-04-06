@@ -131,4 +131,24 @@ public class DBUtil {
 	public static Vector<Object> resultSetToRowsVector(ResultSet res) {
 		return VectorGenerator.resultSetToRowsVector(res);
 	}
+	
+	/**
+	 * Generates a Vector containing data in i'th column
+	 * @param res ResultSet to generate a Vector
+	 * @param index Column index of resultset (1-based indexing)
+	 * @return Vector filled with rows in i'th column
+	 */
+	public static Vector<Object> resultSetToRowsVector(ResultSet res, int index) {
+		return VectorGenerator.resultSetToRowsVector(res, index);
+	}
+	
+	/**
+	 * Generates a Vector containing data in column named colName
+	 * @param res ResultSet to generate a Vector
+	 * @param colName Column Name of resultset (1-based indexing)
+	 * @return Vector filled with rows in column names colName
+	 */
+	public static Vector<Object> resultSetToRowsVector(ResultSet res, String colName) {
+		return VectorGenerator.resultSetToRowsVector(res, colName);
+	}
 }
