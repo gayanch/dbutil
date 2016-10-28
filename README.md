@@ -22,5 +22,5 @@ Java Library for Generate Table/ComboBox/List Models and Vectors from sql Result
 
 # Notes
 * Add dbutil.jar file to your classpath before using.
-* And import DBUtil by `import org.gck.DBUtil;` 
+* And import DBUtil by `import org.gck.dbutil.DBUtil;` 
 * See JavaDocs for other useful overloaded methods.
